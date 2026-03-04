@@ -274,13 +274,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+Phone-call based scam caller who
+* is based in Singapore
+* executes financial scams
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Manages large volumes of scam caller victims' contact information in Singapore
+* Possible identification, and visualisation of victim social networks
+* Filter/sort for high-risk / low-reward victims
+* Reminders to follow-up on certain higher potential victims
+* Single-user application for security and anonymity
 
 
 ### User stories
