@@ -23,13 +23,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lim Rui Yuan
 
-<img src="images/ooliimry.png" width="200px">
+<img src="images/oolimry.png" width="200px">
 
-[[github](http://github.com/oolimry)]
-[[homepage](https://store.steampowered.com/app/3410660/]
+[[github](https://github.com/oolimry/)]
 
 * Role: Slacker
-* Responsibilities: Keep Donald in Check
+* Responsibilities: Keep Jinxia in Check
 
 ### Pan Jinxia
 
