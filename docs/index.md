@@ -12,8 +12,8 @@
 
 **ScamBook is a desktop application for phone-based scammers to maintain and track their database of contacts.** It is optimized for tech-savvy typing-preferred users, with a greater focus on CLI features compared to GUI.
 
-* If you are interested in using AddressBook, head over to the [User Guide](UserGuide.html).
-* If you are interested about developing AddressBook, the [Developer Guide](DeveloperGuide.html) is a good place to start.
+* If you are interested in using ScamBook, head over to the [User Guide](UserGuide.html).
+* If you are interested about developing ScamBook, the [Developer Guide](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
