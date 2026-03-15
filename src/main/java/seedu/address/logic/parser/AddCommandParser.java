@@ -30,7 +30,6 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser extends Parser<AddCommand> {
 
-
     @Override
     InputPattern createInputPattern() {
         ArrayList<Token> tokens = new ArrayList<Token>(List.of(
