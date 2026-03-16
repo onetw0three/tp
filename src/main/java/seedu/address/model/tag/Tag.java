@@ -75,7 +75,7 @@ public class Tag {
      * @return Boolean indicating validity of the string.
      */
     public static boolean isValidTagString(String test) {
-        return test.matches(ONE_DELIMITER_REGEX);
+        return test.matches(ONE_DELIMITER_REGEX) && test.split(TAG_DELIMITER).length == 2;
     }
 
     /**
