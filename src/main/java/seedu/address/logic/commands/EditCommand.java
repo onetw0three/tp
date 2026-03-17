@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_NAME;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -29,12 +32,12 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[--name NAME] "
-            + "[--phone PHONE] "
-            + "[--email EMAIL] "
+            + "[" + PARAM_ID_NAME + "] "
+            + "[" + PARAM_ID_PHONE + "] "
+            + "[" + PARAM_ID_EMAIL + "] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + "--phone 91234567 "
-            + "--email johndoe@example.com";
+            + PARAM_ID_PHONE + " 91234567 "
+            + PARAM_ID_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
