@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.inputpatterns;
 
 import static seedu.address.logic.parser.CliSyntax.PARAM_ID_TAG;
-import static seedu.address.logic.parser.CliSyntax.PARAM_ID_TAG_ADD;
 
 import seedu.address.model.tag.Tag;
 

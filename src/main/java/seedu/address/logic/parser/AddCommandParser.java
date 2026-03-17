@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_TAG;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -20,7 +24,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.TagList;
 import seedu.address.model.tag.Tag;
 
-import static seedu.address.logic.parser.CliSyntax.*;
 
 
 /**
