@@ -33,8 +33,8 @@ scale to your needs;
 
 ScamBook is the app for you!
 
-<!-- Potentially include a table of problems solved, value proposition,
-etc. -->
+<!-- TODO: Potentially include a table of problems solved, value
+proposition, etc. -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -44,25 +44,37 @@ etc. -->
 <!-- Quickstart: Installation instructions -->
 ### Installation
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Mac users:** Ensure you have the precise JDK version prescribed
+   [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   <!-- TODO: Add detailed checking/installation instructions for JDK -->
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from
+   [here](https://github.com/AY2526S2-CS2103T-T16-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for
+   your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in,
+   and use the `java -jar addressbook.jar` command to run the
+   application.<br>
 
 <!-- Quickstart: Overview of UI -->
 ### Overview
-A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-![Ui](images/Ui.png)
+A GUI similar to the below should appear in a few seconds. Note how the
+app contains some sample data.<br>
+
+![Ui](images/Ui.png) <!-- TODO: annotated screenshot of the UI -->
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add John Doe --phone 98765432 --email johnd@example.com --tag address:John street, block 123, #01-01` : Adds a contact named `John Doe` to ScamBook.
+
+   * `tag 2 --add income:100000 --edit address:Tom street` : Adds the tag
+     `income:100000` to the 2nd contact shown in the current list, and
+     edits the `address` tag of that contact to be `Tom street`.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -71,8 +83,12 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
    * `exit` : Exits the app.
 
 <!-- Quickstart: Adding, editing, deleting, basic general workflow -->
+
 ### Basic commands
-1. Refer to the [Features](#features) below for details of each command.
+
+Refer to the [Features](#features) section below for details of each
+command, or the [Commands Summary](#commands-summary) section for a quick
+summary of all commands and their formats.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,19 +100,24 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add NAME`, `NAME` is a parameter which can be used as `add John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `NAME [--phone PHONE]` can be used as `John Doe --phone 88463679` or as `John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times (including zero times).<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Mandatory parameters must come before optional parameters.<br>
+  e.g. if the command specifies `NAME [--phone PHONE]`, `--phone 88091246 John` is not acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Optional parameters can be in any order.<br>
+  e.g. if the command specifies `[--phone PHONE] [--email EMAIL]`,
+  `--email john@example.com --phone 91842739` is also acceptable.
+
+* Extraneous parameters for commands that do not take in parameters (such
+  as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command input is `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -159,11 +180,23 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+
+### Filtering the list of persons : `filter`
+
+<!-- TODO: filter description here-->
+
+
+### Sorting the list of persons : `sort`
+
+<!-- TODO: sort description here-->
+
 
 ### Editing a person : `edit`
 
@@ -182,23 +215,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+### Tagging a person : `tag`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+<!-- TODO: tag description here-->
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -214,11 +235,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+
+### Deleting the app and all data: `nuke`
+
+<!-- TODO: nuke description here-->
+
 
 ### Exiting the program : `exit`
 
@@ -226,9 +254,11 @@ Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -243,9 +273,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 <!-- Upcoming features -->
 
-### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -281,7 +309,7 @@ repository](https://github.com/AY2526S2-CS2103T-T16-1/tp/issues).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Commands summary
 <!-- A summary of all commands. Should be of same/similar format as help
 command output -->
 
