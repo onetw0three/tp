@@ -1,20 +1,19 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PARAM_ID_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PARAM_ID_NAME;
-import static seedu.address.logic.parser.CliSyntax.PARAM_ID_PHONE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.List;
 import java.util.Map;
+import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_NAME;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ID_PHONE;
 import seedu.address.model.Model;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.EmailContainsPredicate;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsPredicate;
 import seedu.address.model.person.predicates.PhoneEqualsPredicate;
 import seedu.address.model.person.predicates.TagContainsPredicate;
 import seedu.address.model.tag.Tag;
@@ -80,7 +79,7 @@ public class FilterCommand extends Command {
         if (paramFilters.containsKey(FilterType.NAME)) {
             List<String> nameFilters = paramFilters.get(FilterType.NAME);
             if (nameFilters != null && !nameFilters.isEmpty()) {
-                predicate = predicate.and(new NameContainsKeywordsPredicate(nameFilters));
+                predicate = predicate.and(new NameContainsPredicate(nameFilters));
             }
         }
 

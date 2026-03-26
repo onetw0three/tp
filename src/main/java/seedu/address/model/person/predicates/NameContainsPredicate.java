@@ -3,28 +3,25 @@ package seedu.address.model.person.predicates;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Email} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class EmailContainsPredicate implements Predicate<Person> {
+public class NameContainsPredicate implements Predicate<Person> {
     private final List<String> substring;
 
-    public EmailContainsPredicate(List<String> keywords) {
+    public NameContainsPredicate(List<String> keywords) {
         this.substring = keywords;
     }
 
     @Override
     public boolean test(Person person) {
-        if (!person.hasEmail()) {
-            return false;
-        }
-
         return substring.stream()
                 .map(String::toLowerCase)
-                .anyMatch(keyword -> person.getEmail().value.toLowerCase().contains(keyword));
+                .anyMatch(keyword -> person.getName().fullName.toLowerCase().contains(keyword));
     }
 
     @Override
@@ -34,11 +31,11 @@ public class EmailContainsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EmailContainsPredicate otherEmailContainsPredicate)) {
+        if (!(other instanceof NameContainsPredicate otherNameContainsPredicate)) {
             return false;
         }
 
-        return substring.equals(otherEmailContainsPredicate.substring);
+        return substring.equals(otherNameContainsPredicate.substring);
     }
 
     @Override
