@@ -149,21 +149,14 @@ Tips about the command, e.g. how to use it more effectively, etc.
 
 -->
 
-### Viewing help : `help`
-
-Shows a pop-up window explaining how to use the basic commands. For more details on how to use this
-application, you can also click on **Copy URL** to access the user guide.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
 ### Adding a person: `add`
 
 Adds a person to the ScamBook.
 
 Format: `add NAME [--phone PHONE] [--email EMAIL] [--tag TAGNAME:TAGVALUE]...`
+
+* There is NO duplicate checking, since it is likely one might encounter multiple people with the same (first) names. Hence, ScamBook supports having multiple people with the same name.
+* If multiple tag name-value pairs have the same tag name (see section on [Tag](#tagging-a-person--tag) below regarding tag name equality), the last value will be used.
 
 <box type="tip" seamless>
 **Tip:** A person can have any number of tags (including 0)
@@ -175,11 +168,48 @@ Examples:
 * `add Besty Croew --tag income:$100000 --tag bank:OCBC`
 
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the ScamBook.
+### Tagging a person : `tag`
 
-Format: `list`
+<!-- TODO: add visuals -->
+
+Modifies (add, edit or delete) the tags of an existing person in the ScamBook.
+
+Format: `tag INDEX [--add NAME:VALUE]... [--edit NAME:VALUE]... [--delete TAGNAME]...​`
+
+<box type="warning" seamless>
+**Caution:** `NAME`, `VALUE`, `TAGNAME` must NOT contain colons (`:`). Otherwise, an error will be displayed. Users are advised not to include double dashes as well (`--`), otherwise behaviour is undefined.
+</box>
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided, if not, nothing will happen upon execution (and success message will be displayed).
+* Optional fields beginning with `--add` represents tags to be added to the person. The tag name must NOT already exist.
+* Optional fields beginning with `--edit` represents tags to be modified of the person. The tag with the corresponding name must already exist.
+* Optional fields beginning with `--delete` represents tags to be deleted. The tag with the corresponding name must already exist.
+
+<box type="warning" seamless>
+If the same tag name appears across multiple optional fields, behaviour is undefined. 2 tag names are considered equivalent if they are equal when all in lowercase with no trailing and leading spaces, and multiple consecutive spaces are interpreted as a single space. In particular, `area code` and ` Area   code` are equal.
+</box>
+
+Examples:
+* `tag 10 --add school:National University of Sinapore` Adds a tag with name `school` and value `National University of Sinapore` to the tenth person. Note the support of spaces in the tag value.
+* `tag 2 --delete age --edit monthly income:10000` Deletes an existing tag with name `age` and edits an existing tag with name `monthly income` to contain `10000` from the second person. Note the support of spaces in tag name and the flexible ordering of parameters.
+* `tag 1 --add school:NUS --edit salary:10000 --delete age` Adds a tag with name `school` and value `NUS`, edits an existing tag with name `salary` to contain `10000` and deletes an existing tag with name `age` from the first person.
+
+
+### Editing a person : `edit`
+
+Edits an existing person in the ScamBook.
+
+Format: `edit INDEX [--name NAME] [--phone PHONE] [--email EMAIL]`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be overwritten by the input values.
+
+Examples:
+* `edit 1 --phone 91234567 --email johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 --name Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 
 ### Filtering the list of persons : `filter`
@@ -219,48 +249,6 @@ Examples:
 * `sort income --alpha` Sorts by the `income` tag alphabetically.
 
 
-### Editing a person : `edit`
-
-Edits an existing person in the ScamBook.
-
-Format: `edit INDEX [--name NAME] [--phone PHONE] [--email EMAIL]`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be overwritten by the input values.
-
-Examples:
-* `edit 1 --phone 91234567 --email johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 --name Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
-
-
-### Tagging a person : `tag`
-
-<!-- TODO: add visuals -->
-
-Modifies (add, edit or delete) the tags of an existing person in the ScamBook.
-
-Format: `tag INDEX [--add NAME:VALUE]... [--edit NAME:VALUE]... [--delete TAGNAME]...​`
-
-<box type="warning" seamless>
-**Caution:** `NAME`, `VALUE`, `TAGNAME` must NOT contain colons (`:`). Otherwise, an error will be displayed.
-</box>
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided, if not, nothing will happen upon execution (and success message will be displayed).
-* Optional fields beginning with `--add` represents tags to be added to the person. The tag name must NOT already exist.
-* Optional fields beginning with `--edit` represents tags to be modified of the person. The tag with the corresponding name must already exist.
-* Optional fields beginning with `--delete` represents tags to be deleted. The tag with the corresponding name must already exist.
-
-<box type="warning" seamless>
-If the same tag name appears across multiple optional fields, behavior is undefined.
-</box>
-
-Examples:
-* `tag 10 --add school:National University of Sinapore` Adds a tag with name `school` and value `National University of Sinapore` to the tenth person. Note the support of spaces in the tag value.
-* `tag 2 --delete age --edit monthly income:10000` Deletes an existing tag with name `age` and edits an existing tag with name `monthly income` to contain `10000` from the second person. Note the support of spaces in tag name and the flexible ordering of parameters. 
-* `tag 1 --add school:NUS --edit salary:10000 --delete age` Adds a tag with name `school` and value `NUS`, edits an existing tag with name `salary` to contain `10000` and deletes an existing tag with name `age` from the first person.
-
 
 ### Marking the status of a person: `clearstatus`, `target`, `scammed`, or `ignore`
 
@@ -297,11 +285,25 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 
+### Listing all persons : `list`
+
+Shows a list of all persons in the ScamBook.
+
+Format: `list`
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the ScamBook.
 
 Format: `clear`
+
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 
 ### Deleting the app and all data: `nuke`
@@ -315,11 +317,15 @@ Format: `nuke`
 </box>
 
 
-### Exiting the program : `exit`
+### Viewing help : `help`
 
-Exits the program.
+Shows a pop-up window explaining how to use the basic commands. For more details on how to use this
+application, you can also click on **Copy URL** to access the user guide.
 
-Format: `exit`
+![help message](images/helpMessage.png)
+
+Format: `help`
+
 
 
 ### Saving the data
@@ -379,16 +385,20 @@ repository](https://github.com/AY2526S2-CS2103T-T16-1/tp/issues).
 <!-- A summary of all commands. Should be of same/similar format as help
 command output -->
 
-Command   | Parameters
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**`add`**    | `NAME [--phone PHONE] [--email EMAIL] [--tag NAME:VALUE]...`<br> e.g., `add John Doe --phone 98765432 --email jognd@example.com --tag school:NUS`
-**`tag`**    | `INDEX [--add NAME:VALUE]... [--edit NAME:VALUE]... [--delete TAGNAME]...`<br> e.g., `tag 1 --add school:NUS --edit salary:10000 --delete age`
-**`edit`**   | `INDEX [--name NAME] [--phone PHONE] [--email EMAIL]`<br> e.g., `edit 1 --name Jane Doe --phone 91234567 --email newemail@example.com`
-**`filter`** | `[--name NAME]... [--phone PHONE]`<br> e.g., `filter --name John --phone 98765432`
-**`sort`**   | `[FIELD] [--asc\|--desc] [--number\|--alpha]`<br> e.g., `sort phone --desc --number`
-**`list`**   | List all contacts
-**`delete`** | `INDEX`<br> e.g., `delete 1`
-**`clear`**  | Delete all contacts
-**`nuke`**   | Delete this app and all locally stored data
-**`help`**   | Show this help message
-**`exit`**   | Exit the application
+| Command           | Functionality and Parameters                                                                                                                                                                 |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`add`**         | Adds a new person<br>`NAME [--phone PHONE] [--email EMAIL] [--tag NAME:VALUE]...`<br> e.g., `add John Doe --phone 98765432 --email jognd@example.com --tag school:NUS`                       |
+| **`tag`**         | Updates tags of an existing person<br>`INDEX [--add NAME:VALUE]... [--edit NAME:VALUE]... [--delete TAGNAME]...`<br> e.g., `tag 1 --add school:NUS --edit salary:10000 --delete age`         |
+| **`edit`**        | Updates the name/phone/email of an existing person<br>`INDEX [--name NAME] [--phone PHONE] [--email EMAIL]`<br> e.g., `edit 1 --name Jane Doe --phone 91234567 --email newemail@example.com` |
+| **`filter`**      | Filters the master list<br>`[--name NAME]... [--phone PHONE]`<br> e.g., `filter --name John --phone 98765432`                                                                                |
+| **`sort`**        | Sorts the currently displayed list<br>`[FIELD] [--asc\|--desc] [--number\|--alpha]`<br> e.g., `sort phone --desc --number`                                                                   |
+| **`clearstatus`** | Clears the status of an existing person<br>`INDEX`<br> e.g., `clearstatus 1`                                                                                                                 |
+| **`target`**      | Marks an existing person as a target<br>`INDEX`<br> e.g., `target 2`                                                                                                                         |
+| **`scammed`**     | Marks an existing person as a scammer<br>`INDEX`<br> e.g., `scammed 3`                                                                                                                       |
+| **`ignore`**      | Marks an existing person as ignored<br>`INDEX`<br> e.g., `ignore 4`                                                                                                                          |
+| **`delete`**      | Deletes an existing person<br>`INDEX`<br> e.g., `delete 5`                                                                                                                                   |
+| **`list`**        | Lists all contacts                                                                                                                                                                           |
+| **`clear`**       | Deletes all contacts                                                                                                                                                                         |
+| **`nuke`**        | Deletes this app and all locally stored data                                                                                                                                                 |
+| **`help`**        | Shows the help message                                                                                                                                                                       |
+| **`exit`**        | Exits the application                                                                                                                                                                        |
