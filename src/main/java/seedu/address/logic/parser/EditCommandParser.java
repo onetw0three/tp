@@ -30,7 +30,7 @@ public class EditCommandParser extends Parser<EditCommand> {
     @Override
     InputPattern createInputPattern() {
         ArrayList<Token> tokens = new ArrayList<Token>(List.of(
-            new IntegerToken("index", 1, Integer.MAX_VALUE)
+            new IntegerToken("index", 1)
         ));
 
         ArrayList<Param> params = new ArrayList<>(List.of(
