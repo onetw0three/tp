@@ -48,11 +48,11 @@ proposition, etc. -->
    [here](https://github.com/AY2526S2-CS2103T-T16-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for
-   your AddressBook.
+   your ScamBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in,
-   and use the `java -jar addressbook.jar` command to run the
-   application.<br>
+   and use the `java -jar ScamBook.jar` command to run the
+   application. (Note: The exact filename of the `.jar` file might differ, for example it might include a version number.) <br>
 
 <!-- Quickstart: Overview of UI -->
 ### Overview
@@ -102,6 +102,7 @@ The `filter` command will only display a subset of filtered profiles in ScamBook
 
 * Items with `…`​ after them can be used multiple times (including zero times).<br>
   e.g. `[--tag NAME:VALUE]…​` can be used as ` ` (i.e. 0 times), `--tag school:NUS`, `--tag school:NUS --tag salary:10000` etc.
+  * A limit of 100 occurrences of each distinct type of multi-occurrence parameters is enforced for each command (after which behaviour is undefined). It is unlikely that this limit will ever be encountered with reasonable use.
 
 * Mandatory parameters must come before optional parameters.<br>
   e.g. if the command specifies `NAME [--phone PHONE]`, `--phone 88091246 John` is not acceptable.
@@ -160,7 +161,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the ScamBook.
 
 Format: `add NAME [--phone PHONE] [--email EMAIL] [--tag TAGNAME:TAGVALUE]...`
 
@@ -176,16 +177,16 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the ScamBook.
 
 Format: `list`
 
 
 ### Filtering the list of persons : `filter`
 
-Filters the list of persons in the address book to show only those that match the specified parameters.
+Filters the list of persons in the ScamBook to show only those that match the specified parameters.
 
-If multiple parameters of the same type are specified, only persons that match all of the specified parameters will be shown. If multiple parameters of different types are specified, persons that match at least one of the specified parameters will be shown.
+If multiple parameters of the same type are specified, only persons that match all the specified parameters will be shown. If multiple parameters of different types are specified, persons that match at least one of the specified parameters will be shown.
 
 Format: `filter [--name NAME]... [--phone PHONE]...`
 
@@ -220,7 +221,7 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the ScamBook.
 
 Format: `edit INDEX [--name NAME] [--phone PHONE] [--email EMAIL]`
 
@@ -283,7 +284,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the ScamBook.
 
 Format: `delete INDEX`
 
@@ -292,13 +293,13 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the ScamBook.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the ScamBook.
 
 Format: `clear`
 
@@ -323,17 +324,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ScamBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ScamBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ScamBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ScamBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
@@ -351,7 +352,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 How do I transfer my data to another Computer?<br>
 
-Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ScamBook home folder.
 -->
 
 <!-- Tutorial: Power user features, shortcuts, efficient usage (only if features implemented) -->
