@@ -158,6 +158,44 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sort feature
+
+The sort mechanism allows users to sort the person list by various fields (name, phone, email, or tag values) in ascending or descending order, with support for numeric or alphabetic comparison modes.
+
+#### Implementation
+
+The sort feature is implemented through the following key classes:
+* `SortCommandParser` — Parses user input and creates a `SortSpec` containing the sort parameters
+* `SortCommand` — Builds a `Comparator<Person>` and applies it to the model
+* `SortSpec` — Value object encapsulating sort parameters (target field, order, mode)
+
+The following sequence diagram shows how a sort operation is executed:
+
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
+
+How the sort command works:
+
+1. The user issues a sort command (e.g., `sort phone --desc`).
+2. `SortCommandParser` parses the arguments and creates a `SortSpec` with the target field (`PHONE`), order (`DESC`), and mode (`NUMBER` by default).
+3. `SortCommand` is created with the `SortSpec` and executed.
+4. During execution, `SortCommand` builds a `Comparator<Person>` based on the `SortSpec`.
+5. The comparator is applied to the view via `Model#updateSortedPersonList()`.
+6. If no filter is active, the master list is also sorted via `Model#sortMasterPersonList()` to persist the sort order.
+
+#### Design considerations
+
+**Aspect: How sort handles null/missing values:**
+
+* **Current choice:** Nulls always sort last, regardless of ascending/descending order.
+    * Pros: Predictable behavior; missing data doesn't clutter results.
+    * Cons: Less flexible for users who want nulls first.
+
+**Aspect: Two-layer sorting (view vs master):**
+
+* **Current choice:** Sort both the view (`SortedList`) and master list (`UniquePersonList`) when unfiltered; sort only the view when filtered.
+    * Pros: Sort order persists across sessions when unfiltered; filtered views don't affect master data.
+    * Cons: Slightly more complex logic to track filter state.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
