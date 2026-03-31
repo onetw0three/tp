@@ -33,11 +33,6 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
 
-        // Scrolls to and selects the person whenever there is an edit to that person
-        selectedPerson.addListener((obs, oldPerson, newPerson) -> {
-            scrollToAndSelect(newPerson);
-        });
-
     }
 
     /**
@@ -53,9 +48,13 @@ public class PersonListPanel extends UiPart<Region> {
                 personListView.getSelectionModel().clearSelection();
                 return;
             }
-            logger.info("Scrolling to: " + person.getName());
-            personListView.scrollTo(person);
-            personListView.getSelectionModel().select(person);
+            int index = personListView.getItems().indexOf(person);
+            if (index < 0) {
+                return;
+            }
+            personListView.getSelectionModel().select(index);
+            // nested runLater ensures layout is complete before scrolling
+            Platform.runLater(() -> personListView.scrollTo(index));
         });
     }
 

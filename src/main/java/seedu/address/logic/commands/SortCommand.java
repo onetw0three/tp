@@ -106,7 +106,8 @@ public class SortCommand extends Command {
         if (!model.isFilteredViewActive()) {
             model.sortMasterPersonList(comparator);
         }
-
+        // Scroll to and select first person in list
+        model.setSelectedPerson(model.getFilteredPersonList().get(0));
         return new CommandResult(String.format("Sorted %d person(s).", model.getFilteredPersonList().size()));
     }
 

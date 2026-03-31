@@ -65,6 +65,8 @@ public class FilterCommand extends Command {
 
         Predicate<Person> combinedPredicate = buildPredicate();
         model.updateFilteredPersonList(combinedPredicate);
+        // Scroll to and select first person in list
+        model.setSelectedPerson(model.getFilteredPersonList().get(0));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
