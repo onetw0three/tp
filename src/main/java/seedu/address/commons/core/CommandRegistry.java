@@ -16,7 +16,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IgnoreStatusCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NukeCommand;
-import seedu.address.logic.commands.ScammedStatusCommand;
+import seedu.address.logic.commands.ScamStatusCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.TargetStatusCommand;
@@ -60,14 +60,14 @@ public class CommandRegistry {
                 SortCommand.EXAMPLE_TWO);
         register(ClearStatusCommand.COMMAND_WORD, "INDEX", ClearStatusCommand.EXAMPLE);
         register(TargetStatusCommand.COMMAND_WORD, "INDEX", TargetStatusCommand.EXAMPLE);
-        register(ScammedStatusCommand.COMMAND_WORD, "INDEX", ScammedStatusCommand.EXAMPLE);
+        register(ScamStatusCommand.COMMAND_WORD, "INDEX", ScamStatusCommand.EXAMPLE);
         register(IgnoreStatusCommand.COMMAND_WORD, "INDEX", IgnoreStatusCommand.EXAMPLE);
 
-        register(ListCommand.COMMAND_WORD, "List all contacts");
-        register(ClearCommand.COMMAND_WORD, "Delete all contacts");
-        register(NukeCommand.COMMAND_WORD, "Delete this app and all locally stored data");
-        register(HelpCommand.COMMAND_WORD, "Show this help message");
-        register(ExitCommand.COMMAND_WORD, "Exit the application");
+        register(ListCommand.COMMAND_WORD, "<no arguments>");
+        register(ClearCommand.COMMAND_WORD, "<no arguments>");
+        register(NukeCommand.COMMAND_WORD, "<no arguments>");
+        register(HelpCommand.COMMAND_WORD, "<no arguments>");
+        register(ExitCommand.COMMAND_WORD, "<no arguments>");
     }
 
     private static void register(String name, String description, String example) {

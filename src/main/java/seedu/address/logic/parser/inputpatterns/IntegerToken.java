@@ -19,6 +19,14 @@ public class IntegerToken extends Token {
         this.maxValue = maxValue;
     }
 
+    /**
+     * Initializes an {@code IntegerToken} with maximum value of {@code Integer.MAX_VALUE}.
+     * @param minValue the minimum possible integer in this field
+     */
+    public IntegerToken(String id, int minValue) {
+        this(id, minValue, Integer.MAX_VALUE);
+    }
+
     @Override
     public String getPreview() {
         return "[" + minValue + "..." + maxValue + "]";

@@ -20,7 +20,7 @@ public class ClearStatusCommandParser extends Parser<ClearStatusCommand> {
     @Override
     InputPattern createInputPattern() {
         ArrayList<Token> tokens = new ArrayList<Token>(List.of(
-                new IntegerToken("index" , 1, 100)
+                new IntegerToken("index" , 1)
         ));
 
         return new InputPattern("clearstatus", tokens);

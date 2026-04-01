@@ -19,7 +19,7 @@ public class Tag {
     public static final String ONE_DELIMITER_REGEX =
             String.format("^[^%s]*%s[^%s]*$", TAG_DELIMITER, TAG_DELIMITER, TAG_DELIMITER);
 
-    public static final int MAX_LENGTH = 30;
+    public static final int MAX_LENGTH = 60;
 
     public static final List<String> BANNED_NAMES = List.of("name", "phone", "email");
 
