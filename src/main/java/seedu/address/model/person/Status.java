@@ -1,15 +1,11 @@
 package seedu.address.model.person;
 
-import java.io.File;
-
 import javafx.scene.image.Image;
-import seedu.address.ui.PersonCard;
 
 /**
  * Represents the status of a person.
  */
 public enum Status {
-
     NONE {
         @Override
         public Image getStatusImage() {
@@ -32,9 +28,9 @@ public enum Status {
         }
     };
 
-    public abstract Image getStatusImage();
-
     private static final Image targetImage = new Image(Status.class.getResourceAsStream("/images/target_status.png"));
     private static final Image scamImage = new Image(Status.class.getResourceAsStream("/images/scam_status.png"));
     private static final Image ignoreImage = new Image(Status.class.getResourceAsStream("/images/ignore_status.png"));
+
+    public abstract Image getStatusImage();
 }
