@@ -47,8 +47,9 @@ public class Messages {
             builder.append("; Email: ").append(person.getEmail());
         }
 
-        builder.append("; Tags: ");
-        person.getPrintableTags().forEach(tag -> builder.append(tag).append(" "));
+        builder.append("; \nTags: \n");
+        builder.append(person.getTags().viewTagsTable());
+        // person.getPrintableTags().forEach(tag -> builder.append(tag).append("\n"));
         return builder.toString();
     }
 
