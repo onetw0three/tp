@@ -48,7 +48,7 @@ public class Messages {
         }
 
         builder.append("; Tags: ");
-        person.getPrintableTags().forEach(builder::append);
+        person.getPrintableTags().forEach(tag -> builder.append(tag).append(" "));
         return builder.toString();
     }
 
