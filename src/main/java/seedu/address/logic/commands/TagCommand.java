@@ -6,9 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PARAM_ID_TAG_DELETE;
 import static seedu.address.logic.parser.CliSyntax.PARAM_ID_TAG_EDIT;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -40,6 +43,8 @@ public class TagCommand extends Command {
     private final List<Tag> addTags;
     private final List<Tag> editTags;
     private final List<Tag> deleteTags;
+
+    private final Logger logger = LogsCenter.getLogger(TagCommand.class);
 
     /**
      * Creates a new TagCommand object.
@@ -79,6 +84,8 @@ public class TagCommand extends Command {
                 person.getStatus());
 
         for (Tag tag : addTags) {
+            assert(Tag.isValidTagPair(tag));
+
             if (updatedPerson.getTags().containsTagName(tag.tagName)) {
                 throw new CommandException(ADD_TAG_ALREADY_EXISTS);
             }
@@ -86,6 +93,8 @@ public class TagCommand extends Command {
         }
 
         for (Tag tag : editTags) {
+            assert(Tag.isValidTagPair(tag));
+
             if (!updatedPerson.getTags().containsTagName(tag.tagName)) {
                 throw new CommandException(EDIT_TAG_NAME_DOES_NOT_EXIST);
             }
@@ -93,6 +102,8 @@ public class TagCommand extends Command {
         }
 
         for (Tag tag : deleteTags) {
+            assert(Tag.isValidTagPair(tag));
+
             if (!updatedPerson.getTags().containsTagName(tag.tagName)) {
                 throw new CommandException(DELETE_TAG_NAME_DOES_NOT_EXIST);
             }
@@ -105,6 +116,12 @@ public class TagCommand extends Command {
         if (!model.getMostRecentPredicate().test(updatedPerson)) {
             model.showAllPersons();
         }
+
+        String logMessage = "Tags changed as follows:\n\tNew tags added: " + addTags.toString()
+                + "\n\tExisting tags updated: " + editTags.toString()
+                + "\n\tExisting tags deleted: " + deleteTags.toString();
+        logger.info(logMessage);
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
