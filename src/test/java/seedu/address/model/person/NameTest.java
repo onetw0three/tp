@@ -31,7 +31,7 @@ public class NameTest {
         // empty string, spaces only, only non-alphanumeric characters, contains non-alphanumeric characters
         for (String name : new String[]{"", " ", "^", "peter*"}) {
             Exception e = assertThrows(IllegalValueException.class, () -> Name.validateName(name));
-            assertEquals(name + " is not a valid name.\n" + Name.MESSAGE_CONSTRAINTS, e.getMessage());
+            assertEquals('"' + name + '"' + " is not a valid name.\n" + Name.MESSAGE_CONSTRAINTS, e.getMessage());
         }
 
         // valid name
