@@ -131,7 +131,7 @@ public class FilterCommand extends Command {
             }
         }
 
-        if (tagFilters != null && !tagFilters.isEmpty()) {
+        if (!tagFilters.isEmpty()) {
             predicate = predicate.and(new TagContainsPredicate(tagFilters));
         }
 

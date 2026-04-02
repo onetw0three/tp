@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -77,6 +79,21 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void constructor_nullParamFilters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new FilterCommand(null, Collections.emptyList()));
+    }
+
+    @Test
+    public void constructor_nullTagFilters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new FilterCommand(new HashMap<>(), null));
+    }
+
+    @Test
+    public void constructor_emptyFilters_doesNotThrow() {
+        assertDoesNotThrow(() -> new FilterCommand(new HashMap<>(), Collections.emptyList()));
+    }
+
+    @Test
     public void execute_noCriteria_showsAll() {
         FilterCommand command = createFilterCommand(new HashMap<>(), Collections.emptyList());
         assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
@@ -85,6 +102,14 @@ public class FilterCommandTest {
     @Test
     public void execute_emptyNameCriteria_showsAll() {
         Map<FilterType, List<String>> criteria = singleParamFilter(FilterType.NAME);
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+        assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
+    public void execute_nullNameCriteria_showsAll() {
+        Map<FilterType, List<String>> criteria = new HashMap<>();
+        criteria.put(FilterType.NAME, null);
         FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
         assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
@@ -136,6 +161,21 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_emptyPhoneCriteria_showsAll() {
+        Map<FilterType, List<String>> criteria = singleParamFilter(FilterType.PHONE);
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+        assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
+    public void execute_nullPhoneCriteria_showsAll() {
+        Map<FilterType, List<String>> criteria = new HashMap<>();
+        criteria.put(FilterType.PHONE, null);
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+        assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
     public void execute_multiplePhoneCriteria_filtersMatching() {
         FilterCommand command = createFilterCommand(singleParamFilter(FilterType.PHONE, "94351253", "98765432"),
                 Collections.emptyList());
@@ -163,12 +203,68 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_emptyEmailCriteria_showsAll() {
+        Map<FilterType, List<String>> criteria = singleParamFilter(FilterType.EMAIL);
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+        assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
+    public void execute_nullEmailCriteria_showsAll() {
+        Map<FilterType, List<String>> criteria = new HashMap<>();
+        criteria.put(FilterType.EMAIL, null);
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+        assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
     public void execute_singleStatusCriteria_filtersCorrectly() {
         FilterCommand command = createFilterCommand(singleParamFilter(FilterType.STATUS, "TARGET"),
                 Collections.emptyList());
 
         expectedModel.updateFilteredPersonList(new StatusEqualsPredicate(List.of(Status.TARGET)));
         assertFilterResult(command, model, List.of(ALICE));
+    }
+
+    @Test
+    public void execute_emptyStatusCriteria_showsAll() {
+        Map<FilterType, List<String>> criteria = singleParamFilter(FilterType.STATUS);
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+        assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
+    public void execute_nullStatusCriteria_showsAll() {
+        Map<FilterType, List<String>> criteria = new HashMap<>();
+        criteria.put(FilterType.STATUS, null);
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+        assertFilterResult(command, model, Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
+    public void execute_invalidStatusCriteria_doesNotCrash() {
+        FilterCommand command = createFilterCommand(singleParamFilter(FilterType.STATUS, "not-a-status"),
+                Collections.emptyList());
+
+        assertDoesNotThrow(() -> command.execute(model));
+    }
+
+    @Test
+    public void execute_invalidAndValidStatusCriteria_filtersUsingValidStatusOnly() {
+        FilterCommand command = createFilterCommand(singleParamFilter(FilterType.STATUS, "TARGET", "not-a-status"),
+                Collections.emptyList());
+
+        expectedModel.updateFilteredPersonList(new StatusEqualsPredicate(Arrays.asList(Status.TARGET, null)));
+        assertFilterResult(command, model, List.of(ALICE));
+    }
+
+    @Test
+    public void execute_onlyInvalidStatusCriteria_returnsEmptyList() {
+        FilterCommand command = createFilterCommand(singleParamFilter(FilterType.STATUS, "not-a-status"),
+                Collections.emptyList());
+
+        expectedModel.updateFilteredPersonList(new StatusEqualsPredicate(Collections.singletonList(null)));
+        assertFilterResult(command, model, Collections.emptyList());
     }
 
     @Test
