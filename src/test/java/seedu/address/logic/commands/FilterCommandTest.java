@@ -26,15 +26,17 @@ import seedu.address.logic.commands.FilterCommand.FilterType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Status;
 import seedu.address.model.person.predicates.EmailContainsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneEqualsPredicate;
+import seedu.address.model.person.predicates.StatusEqualsPredicate;
 import seedu.address.model.person.predicates.TagContainsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for FilterCommand.
- * Tests cover all filter types (name, phone, email, tag), their combinations, and edge cases.
+ * Tests cover all filter types (name, phone, email, status, tag), their combinations, and edge cases.
  */
 public class FilterCommandTest {
 
@@ -161,6 +163,33 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_singleStatusCriteria_filtersCorrectly() {
+        FilterCommand command = createFilterCommand(singleParamFilter(FilterType.STATUS, "TARGET"),
+                Collections.emptyList());
+
+        expectedModel.updateFilteredPersonList(new StatusEqualsPredicate(List.of(Status.TARGET)));
+        assertFilterResult(command, model, List.of(ALICE));
+    }
+
+    @Test
+    public void execute_multipleStatusCriteria_filtersMatching() {
+        FilterCommand command = createFilterCommand(singleParamFilter(FilterType.STATUS, "TARGET", "IGNORE"),
+                Collections.emptyList());
+
+        expectedModel.updateFilteredPersonList(new StatusEqualsPredicate(List.of(Status.TARGET, Status.IGNORE)));
+        assertFilterResult(command, model, Arrays.asList(ALICE, CARL));
+    }
+
+    @Test
+    public void execute_statusMatchesNoOne_emptyList() {
+        FilterCommand command = createFilterCommand(singleParamFilter(FilterType.STATUS, "NONE"),
+                Collections.emptyList());
+
+        expectedModel.updateFilteredPersonList(new StatusEqualsPredicate(List.of(Status.NONE)));
+        assertFilterResult(command, model, Arrays.asList(DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    @Test
     public void execute_multipleEmailCriteria_filtersMatching() {
         FilterCommand command = createFilterCommand(
                 singleParamFilter(FilterType.EMAIL, "alice@example.com", "johnd@example.com"),
@@ -254,6 +283,19 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(
                 new EmailContainsPredicate(List.of("johnd@example.com"))
                         .and(new TagContainsPredicate(tagFilters)));
+        assertFilterResult(command, model, List.of(BENSON));
+    }
+
+    @Test
+    public void execute_statusAndEmailCriteria_filtersByBoth() {
+        Map<FilterType, List<String>> criteria = new HashMap<>();
+        criteria.put(FilterType.STATUS, List.of("SCAM"));
+        criteria.put(FilterType.EMAIL, List.of("johnd@example.com"));
+        FilterCommand command = createFilterCommand(criteria, Collections.emptyList());
+
+        expectedModel.updateFilteredPersonList(
+                new StatusEqualsPredicate(List.of(Status.SCAM))
+                        .and(new EmailContainsPredicate(List.of("johnd@example.com"))));
         assertFilterResult(command, model, List.of(BENSON));
     }
 
