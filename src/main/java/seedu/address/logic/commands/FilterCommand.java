@@ -23,7 +23,7 @@ import seedu.address.model.person.predicates.NameContainsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsPredicate;
 import seedu.address.model.person.predicates.StatusEqualsPredicate;
 import seedu.address.model.person.predicates.TagContainsPredicate;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagFilter;
 
 /**
  * Filters the list of profiles by specified criteria.
@@ -39,12 +39,15 @@ public class FilterCommand extends Command {
             + PARAM_ID_PHONE + " 98765432 "
             + PARAM_ID_EMAIL + " johnd@example.com "
             + PARAM_ID_STATUS + " target "
-            + PARAM_ID_TAG + " school:NUS ";
+            + PARAM_ID_TAG + " school:NUS "
+            + PARAM_ID_TAG + " job ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters profiles by the specified parameters.\n"
-            + "Parameters: [" + PARAM_ID_NAME + " <name>]* [" + PARAM_ID_PHONE + " <phone>]* "
-            + "[" + PARAM_ID_EMAIL + " <email>]* [" + PARAM_ID_STATUS + " <status>]* "
-            + "[--<tagName>:<tagValue>]*\n"
+            + "Parameters: [" + PARAM_ID_NAME + " <name>]... "
+            + "[" + PARAM_ID_PHONE + " <phone>]... "
+            + "[" + PARAM_ID_EMAIL + " <email>]... "
+            + "[" + PARAM_ID_STATUS + " <status>]... "
+            + "[" + PARAM_ID_TAG + " <tagName>[:<tagValue>]]...\n"
             + "Example: " + EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "Filtered victim profiles.";
@@ -56,7 +59,7 @@ public class FilterCommand extends Command {
         NAME, PHONE, EMAIL, STATUS
     }
     private final Map<FilterType, List<String>> paramFilters;
-    private final List<Tag> tagFilters;
+    private final List<TagFilter> tagFilters;
 
     /**
      * Creates a FilterCommand with the given filter criteria.
@@ -64,9 +67,9 @@ public class FilterCommand extends Command {
      * If no criteria are provided (empty map), all profiles are shown.
      *
      * @param paramFilters a map from filter type (NAME, PHONE, EMAIL, STATUS) to filter value
-     * @param tagFilters a list of tags to filter by
+     * @param tagFilters a list of tag filters to filter by
      */
-    public FilterCommand(Map<FilterType, List<String>> paramFilters, List<Tag> tagFilters) {
+    public FilterCommand(Map<FilterType, List<String>> paramFilters, List<TagFilter> tagFilters) {
         requireNonNull(paramFilters);
         requireNonNull(tagFilters);
 
