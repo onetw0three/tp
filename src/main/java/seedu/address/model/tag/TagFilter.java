@@ -27,8 +27,7 @@ public class TagFilter {
                 Tag.validateTagPair(filterStr);
                 this.tagName = Tag.getNameFromRaw(filterStr);
                 this.tagValue = Tag.getValueFromRaw(filterStr);
-            }
-            else {
+            } else {
                 String strippedFilter = filterStr.trim();
                 Tag.validateTagName(strippedFilter);
                 this.tagName = strippedFilter;

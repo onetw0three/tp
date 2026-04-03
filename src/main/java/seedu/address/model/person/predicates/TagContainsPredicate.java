@@ -25,7 +25,8 @@ public class TagContainsPredicate implements Predicate<Person> {
         TagList personTags = person.getTags();
         return tagFilters.stream().allMatch(tagFilter -> personTags.filterTagCaseInsensitive(tagFilter.tagName)
             .filter(tagValue -> tagFilter.getTagValue()
-                                         .map(expectedValue -> tagValue.toLowerCase().contains(expectedValue.toLowerCase()))
+                                         .map(expectedValue -> tagValue.toLowerCase()
+                                                                       .contains(expectedValue.toLowerCase()))
                                          .orElse(true))
             .isPresent());
     }

@@ -22,8 +22,7 @@ public class TagParam extends Param {
     boolean valueMatches(String value) throws IllegalValueException {
         if (value.contains(Tag.TAG_DELIMITER)) {
             return Tag.validateTagPair(value);
-        }
-        else {
+        } else {
             return Tag.validateTagName(value); // Tag value not provided
         }
     }
