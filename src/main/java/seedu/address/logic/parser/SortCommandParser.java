@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Locale;
-
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortCommand.SortMode;
 import seedu.address.logic.commands.SortCommand.SortOrder;
