@@ -187,6 +187,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            // Scroll to selected person on explicit command execution
+            personListPanel.scrollToAndSelect(logic.getSelectedPerson().getValue());
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
