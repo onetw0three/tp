@@ -184,6 +184,21 @@ public class Tag {
         return Tag.validateTagName(tagName) && Tag.validateTagValue(tagValue);
     }
 
+    /**
+     * Checks if a given {@code Tag} is a fully valid tag, without throwing errors.
+     * @param test Tag to be tested.
+     * @return Boolean indicating validity of tag.
+     */
+    public static boolean isValidTagPair(Tag test) {
+        try {
+            Tag.validateTagName(test.tagName);
+            Tag.validateTagValue(test.tagValue);
+            return true;
+        } catch (IllegalValueException e) {
+            return false;
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
