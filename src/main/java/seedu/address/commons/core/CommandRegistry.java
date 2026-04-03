@@ -54,9 +54,8 @@ public class CommandRegistry {
                 TagCommand.EXAMPLE);
 
         register(FilterCommand.COMMAND_WORD,
-                "[--name NAME]... [--phone PHONE]... [--email EMAIL]... [--status STATUS]..." +
-                        "[--tag NAME[:VALUE]]...\n" +
-                        "[--tag NAME[:VALUE]]... filters by tags with the given name and optional value. ",
+                "[--name NAME]... [--phone PHONE]... [--email EMAIL]... [--status STATUS]..."
+                        + "[--tag NAME[:VALUE]]...",
                 FilterCommand.EXAMPLE);
 
         register(SortCommand.COMMAND_WORD,
