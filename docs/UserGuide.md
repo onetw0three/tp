@@ -7,6 +7,8 @@
 ScamBook User Guide
 ---
 
+---------------------------------
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -14,7 +16,7 @@ ScamBook User Guide
 
 ### What is ScamBook?
 
-ScamBook is a **desktop contact management app** optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+ScamBook is a **desktop contact management app** optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  ScamBook allows users to track **large numbers of contacts** with flexible **user-defined** information metrics. It is equipped with features for users to **define and manipulate specific details** for each profile, offering maximum freedom to **record, filter, and sort** any detail. Plus, enjoy **ultimate security** with 100% **locally** stored data, erasable **instantly**.
 
 ### Who is ScamBook for?
 
@@ -50,14 +52,15 @@ proposition, etc. -->
 1. Copy the file to the folder you want to use as the _home folder_ for
    your ScamBook.
 
-1. Double-click on the .jar file to run the application. If the application does not launch,
-   refer to [FAQ](#Troubleshooting) for alternate ways to launch the application
+1. Double-click on the `.jar` file to run the application. If the application does not launch,
+refer to [FAQ](#Troubleshooting) for alternate ways to launch the application.
 
 <!-- Quickstart: Overview of UI -->
 ### Overview
 A GUI similar to the below should appear in a few seconds. The app contains some sample data for you to use.<br>
 
 ![Ui](images/Ui.png) <!-- TODO: annotated screenshot of the UI -->
+<small>*<center>Image credits for status icons: Downloaded from https://emoji.aranja.com/.</center>*</small>
 
 The top part of the application is the contact list - you can view contacts there.
 
@@ -184,6 +187,9 @@ Examples:
 * `add John Doe --phone 98765432 --email johnd@example.com --tag address:John street, block 123, #01-01`
 * `add Besty Croew --tag income:$100000 --tag bank:OCBC`
 
+
+<br>
+
 ### Editing a person : `edit`
 
 Edits an existing person's name, phone number or email. For editing tags, see the [Tag Command](#tagging-a-person--tag).
@@ -199,6 +205,8 @@ Examples:
 * `edit 2 --name Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 
+<br>
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the ScamBook.
@@ -213,11 +221,18 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 
+<br>
+
 ### Tagging a person : `tag`
 
 <!-- TODO: add visuals -->
 
-Modifies (add, edit or delete) the tags of an existing person in the ScamBook.
+A tag is a name-value pair that allows the user to record any arbitrary information so desired about a profile. This is achieved by this command, which modifies (add, edit or delete) the tags of an existing person in the ScamBook. In the image below of an example profile in the app, each blue box represents a tag-value pair capturing some useful information about the person.
+
+
+<center><img src="images/example_profile_with_tags.png" alt="Example profile with tags" width="400"/></center>
+
+<br>
 
 Format: `tag INDEX [--add NAME:VALUE]... [--edit NAME:VALUE]... [--delete TAGNAME]...​`
 
@@ -241,13 +256,15 @@ Examples:
 * `tag 1 --add school:NUS --edit salary:10000 --delete age` Adds a tag with name `school` and value `NUS`, edits an existing tag with name `salary` to contain `10000` and deletes an existing tag with name `age` from the first person.
 
 
+<br>
+
 ### Filtering the list of persons : `filter`
 
 Filters the list of persons in the ScamBook to show only those that match the specified parameters.
 
 If multiple parameters of the same type are specified, only persons that match all the specified parameters will be shown. If multiple parameters of different types are specified, persons that match at least one of the specified parameters will be shown.
 
-Format: `filter [--name NAME]... [--phone PHONE] [--email EMAIL] [--tag NAME:VALUE]...`
+Format: `filter [--name NAME]... [--phone PHONE]... [--email EMAIL]... [--tag NAME:VALUE]...`
 
 - `filter --name John --phone 98765432`
   Shows all persons whose name contains `John` and phone number is `98765432`.
@@ -266,6 +283,8 @@ if the modified person(s) still fulfill the most recent filter applied, the disp
 </box>
 
 
+<br>
+
 ### Sorting the list of persons : `sort`
 
 Sorts the current list of persons by a specified field.
@@ -283,23 +302,23 @@ Examples:
 * `sort income --alpha` Sorts by the `income` tag alphabetically.
 
 
+<br>
 
-### Marking the status of a person: `clearstatus`, `target`, `scam`, or `ignore`
+### Marking person status: `clearstatus`, `target`, `scam`, or `ignore`
 
-Sets the status of a specific person. We currently support 4 common statuses:
-- `scam`: this person has been scammed
-- `ignore`: this person should be ignored
-- `target`: this person is potential victim to target
-- no status: this is the default state when a person is added to ScamBook
+Sets the status of a specific person. We currently support 4 common statuses, each represented by its corresponding command name. Referring the image below (same image as in the [Overview](#overview) section, reproduced here for convenience), the emoji of each profile represents its status, as set by the four commands, in order.
+1. No status, via `clearstatus`.
+2. A potential target, via `target`.
+3. Already scammed, via `scam`.
+4. To be ignored, via `ignore`.
 
-Setting the status creates an icon on the right side of each box for easy identification:
+![Example screenshot of status commands](images/status_command.png)
 
 ![StatusDiagram.png](images/StatusDiagram.png)
 
 In the above image, the people have the status of `scam`, `ignore`, `target` and no status respectively.
 
-Format: `status_command INDEX`
-* `status_command` can be replaced by either one of `clearstatus`, `target`, `scam`, or `ignore`.
+* `status_command` should be replaced by either one of `clearstatus`, `target`, `scam`, or `ignore`.
 * Sets the status of the person at the specified `INDEX`.
 * The new status overwrites any previously existing status, i.e. each person can have exactly 1 status at any time (no status is also a status).
 * Setting a particular status for a person that already has the corresponding status will do nothing (and success message will be displayed).
@@ -329,6 +348,8 @@ Format: `clear`
 <b>Caution:</b> This action is irreversible. Use with caution.
 </box>
 
+<br>
+
 ### Deleting the app and all data: `nuke`
 
 Deletes the app and all locally stored data.
@@ -340,6 +361,8 @@ Format: `nuke`
 </box>
 
 
+<br>
+
 ### Viewing help : `help`
 
 Shows a pop-up window explaining how to use the basic commands. For more details on how to use this
@@ -349,6 +372,8 @@ application, you can also click on **Copy URL** to access the user guide.
 
 Format: `help`
 
+
+<br>
 
 ### Exiting the program : `exit`
 
@@ -378,9 +403,14 @@ Emails should be of the format `local-part@domain` and adhere to the following c
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
 
+<br>
+
 ### Saving the data
 
 ScamBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+
+<br>
 
 ### Editing the data file
 
@@ -427,32 +457,31 @@ repository](https://github.com/AY2526S2-CS2103T-T16-1/tp/issues).
 
 2. The current format for command parameters uses double dashes (`--`), i.e. long options. This design choice was made because it ensures greater clarity in command formats, and also allows greater convenience in input values (single dashes can be used freely without having to escape it). Future work will support abbreviations, i.e. single dashes (`-`), just like command line applications, for greater convenience for experienced users.
 
+3. Currently, all data has to be either manually added via the commands, or by editing the `json` data file. Future work will support more mechanisms for data importation, such as reading directly from a `.csv` or `.xlsx` file.
+
+4. A scammer might have different personas when operating, such as pretending to be personnel from different banks. A possible future direction is to allow users to create multiple sets of ScamBooks, each with their own separate details, so every distinct persona can have its own list of contacts.
+
+5. Another significant area for future implementation is better integer parsing. Currently, tag values are parsed as is, so values such as `$100000` and `$200,000` are not recognised as numbers. This feature will allow more flexible interpretation of numbers, allowing the `sort` command to work on tags such as `savings: $1,000,000`.
+
 --------------------------------------------------------------------------------------------------------------------
 
-[//]: # (## Tutorials)
+## FAQ
 
-<!-- Tutorial: Working with tags, general workflow -->
+### Troubleshooting
+**Q:** I encounter an error when I double-click on the `.jar` file to run the application.<br>
+**A:** Open a terminal window at the location of the application. This can be done by right-clicking on the file explorer, as shown in the image below, then clicking on the button `Open in Terminal`. (The image is for Windows, other operating systems have a similar feature). Type the following command: `java -jar <name of the jar file>`. In the example of the image below, this would be `java -jar ScamBook-v1.4.jar`.
 
-<!-- Tutorial: Data transfer
-
-How do I transfer my data to another Computer?<br>
-
-Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ScamBook home folder.
--->
-
-<!-- Tutorial: Power user features, shortcuts, efficient usage (only if features implemented) -->
-
-
-<!-- Known issues, e.g. bugs, limitations, etc. Only add if affects a normal user experience. Ideally this section does not exist.
+![Example screenshot in Windows of how to open terminal](images/HowToOpenTerminal.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. When using multiple screens, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
--->
+2. If you minimize the Help Window and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+3. `nuke` command does not delete the application on Windows OS, due to a limitation of the OS disabling deletion by the app itself.
 
 --------------------------------------------------------------------------------------------------------------------
 
