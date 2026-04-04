@@ -22,7 +22,7 @@ ScamBook is a **desktop contact management app** optimised for use via a Command
 
 ScamBook is designed for **Singapore-based investment and financial scam callers** managing a high volume of victim contacts daily. If you are a scammer who:
 * is **tech-savvy** and prefer typing to clicking, and comfortable with
-  a command line interfaces (CLI);
+  command line interfaces (CLI);
 * operates as a **solo caller** and need a private, single-user system to
   manage your contacts;
 * handles **hundreds to thousands of contacts** and need a system that can
@@ -30,9 +30,6 @@ ScamBook is designed for **Singapore-based investment and financial scam callers
 * needs to manage and update contacts **on-the-go during live calls**;
 
 ScamBook is the app for you!
-
-<!-- TODO: Potentially include a table of problems solved, value
-proposition, etc. -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -44,7 +41,6 @@ proposition, etc. -->
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version found
    [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-   <!-- TODO: Add detailed checking/installation instructions for JDK -->
 
 1. Download the latest `.jar` file from
    [here](https://github.com/AY2526S2-CS2103T-T16-1/tp/releases).
@@ -53,13 +49,13 @@ proposition, etc. -->
    your ScamBook.
 
 1. Double-click on the `.jar` file to run the application. If the application does not launch,
-refer to [FAQ](#Troubleshooting) for alternate ways to launch the application.
+refer to [troubleshooting](#troubleshooting) for alternate ways to launch the application.
 
 <!-- Quickstart: Overview of UI -->
 ### Overview
 A GUI similar to the below should appear in a few seconds. The app contains some sample data for you to use.<br>
 
-![Ui](images/Ui.png) <!-- TODO: annotated screenshot of the UI -->
+![Ui](images/Ui.png) 
 <small>*<center>Image credits for status icons: Downloaded from https://emoji.aranja.com/.</center>*</small>
 
 The top part of the application is the contact list - you can view contacts there.
@@ -103,7 +99,7 @@ Refer to the [Command List](#commands) below for details of each command, or the
 
 ## Command Format Information
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user. They can contain spaces and special characters (except `index`, which expects a single positive integer). <br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. They can contain spaces and special characters (except `INDEX`, which expects a single positive integer). <br>
   e.g. in `add NAME`, `NAME` is a parameter which can be used as `add John Doe`.
 
 * Parameters in `[square brackets]` are optional.<br>
@@ -180,7 +176,7 @@ Format: `add NAME [--phone PHONE] [--email EMAIL] [--tag TAGNAME:TAGVALUE]...`
 
 Examples:
 * `add John Doe --phone 98765432 --email johnd@example.com --tag address:John street, block 123, #01-01`
-* `add Besty Croew --tag income:$100000 --tag bank:OCBC`
+* `add Besty Crower --tag income:$100000 --tag bank:OCBC`
 
 
 <br>
@@ -220,8 +216,6 @@ Examples:
 
 ### Tagging a person : `tag`
 
-<!-- TODO: add visuals -->
-
 A tag is a name-value pair that allows the user to record any arbitrary information so desired about a profile. This is achieved by this command, which modifies (add, edit or delete) the tags of an existing person in the ScamBook. In the image below of an example profile in the app, each blue box represents a tag-value pair capturing some useful information about the person.
 
 
@@ -237,9 +231,9 @@ Format: `tag INDEX [--add NAME:VALUE]... [--edit NAME:VALUE]... [--delete TAGNAM
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided, if not, nothing will happen upon execution (and success message will be displayed).
-* Optional fields beginning with `--add` represents tags to be added to the person. The tag name must NOT already exist.
-* Optional fields beginning with `--edit` represents tags to be modified of the person. The tag with the corresponding name must already exist.
-* Optional fields beginning with `--delete` represents tags to be deleted. The tag with the corresponding name must already exist.
+* Optional fields beginning with `--add` represent tags to be added to the person. The tag name must NOT already exist.
+* Optional fields beginning with `--edit` represent tags to be modified of the person. The tag with the corresponding name must already exist.
+* Optional fields beginning with `--delete` represent tags to be deleted. The tag with the corresponding name must already exist.
 
 <box type="warning" seamless>
 If the same tag name appears across multiple optional fields, behaviour is undefined. 2 tag names are considered equivalent if they are exactly equal character for character after removing leading and trailing whitespace.
@@ -328,7 +322,7 @@ Sets the status of a specific person. We currently support 4 common statuses, ea
 
 ![Example screenshot of status commands](images/status_command.png)
 
-In the above image, the people have the status of no status, `target`, `scam`, `ignore` and  respectively.
+In the above image, the people have the status of no status, `target`, `scam`, and `ignore`  respectively.
 
 * `status_command` should be replaced by either one of `clearstatus`, `target`, `scam`, or `ignore`.
 * Sets the status of the person at the specified `INDEX`.
